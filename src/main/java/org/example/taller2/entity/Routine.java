@@ -9,36 +9,42 @@ import java.util.*;
 public class Routine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private Date date;
 
-
-    @ManyToMany
-    @JoinTable(
-            name = "exercise_routine",
-            joinColumns = @JoinColumn(name = "routine_id"),
-            inverseJoinColumns = @JoinColumn(name = "exercise_id")
-    )
-    private List<Exercise> exercises = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "routines")
-    private Set<User> users = new HashSet<>();
+    @OneToMany(mappedBy = "user",  cascade = CascadeType.ALL,  orphanRemoval = true)
+    private List<UserRoutine> userRoutineList;
 
 
     public Routine() {}
 
-    public Routine(Long id,Date date) {
+    public Routine(Integer id,Date date) {
         this.id = id;
         this.date = date;
 
     }
 
-    public Long getId() {return id;}
-    public void setId(Long id) {this.id = id;}
-    public Date getDate() {return date;}
-    public void setDate(Date date) {this.date = date;}
-    public List<Exercise> getExercises() {return exercises;}
-    public void setExercises(List<Exercise> exercises) {this.exercises = exercises;}
-    public Set<User> getUsers() {return users;}
-    public void setUsers(Set<User> users) {this.users = users;}
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public List<UserRoutine> getUserRoutineList() {
+        return userRoutineList;
+    }
+
+    public void setUserRoutineList(List<UserRoutine> userRoutineList) {
+        this.userRoutineList = userRoutineList;
+    }
 }

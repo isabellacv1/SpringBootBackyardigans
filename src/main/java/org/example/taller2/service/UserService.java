@@ -1,4 +1,4 @@
 package org.example.taller2.service;
 
-public class UserService {
+public interface UserService {
 }
