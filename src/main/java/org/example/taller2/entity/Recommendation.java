@@ -20,5 +20,18 @@ public class Recommendation {
     private String description;
     private String title;
 
+    @EmbeddedId
+    private RecommendationId recommendationId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("studentId")
+    @JoinColumn(name = "student_id")
+    private User studentUser;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("trainerId")
+    @JoinColumn(name = "trainer_id")
+    private User trainerUser;
+
 
 }

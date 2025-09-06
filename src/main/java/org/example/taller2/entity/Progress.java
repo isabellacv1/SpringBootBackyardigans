@@ -14,4 +14,8 @@ import lombok.Setter;
 public class Progress {
 
 
+    private Integer repetitions;
+    private Integer time;
+    private Date date;
+
 }
