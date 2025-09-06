@@ -44,5 +44,8 @@ public class User {
     @OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TrainerStudent> trainerStudentsAsTrainer;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EventParticipation> eventParticipations;
 
 }

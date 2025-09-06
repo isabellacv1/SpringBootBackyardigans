@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "exerciseType")
-public class ExerciseType {
+@Table(name = "difficulty")
+public class Difficulty {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +21,5 @@ public class ExerciseType {
 
 
 }
+
 

@@ -1,5 +1,6 @@
 package org.example.taller2.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -24,5 +26,9 @@ public class Event {
     private String place;
     private String type;
     private String placeCapacity;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EventParticipation> events;
 
 }
