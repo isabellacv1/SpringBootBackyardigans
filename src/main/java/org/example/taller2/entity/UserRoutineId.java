@@ -2,10 +2,18 @@ package org.example.taller2.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Embeddable
 public class UserRoutineId implements Serializable {
     @Column(name="user_id")
@@ -13,17 +21,6 @@ public class UserRoutineId implements Serializable {
 
     @Column(name="routine_id")
     private Integer routineId;
-
-    public UserRoutineId() {}
-
-    public UserRoutineId(Integer userId, Integer routineId) {
-        this.userId = userId;
-        this.routineId = routineId;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
 
     @Override
     public boolean equals(Object o){

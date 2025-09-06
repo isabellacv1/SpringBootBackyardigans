@@ -1,4 +1,7 @@
 package org.example.taller2.repository;
 
-public class ScheduleRepository {
-}
+import org.example.taller2.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ScheduleRepository extends JpaRepository<User, Long> {}
+

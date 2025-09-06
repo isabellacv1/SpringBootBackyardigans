@@ -1,10 +1,19 @@
 package org.example.taller2.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name="exercises")
 public class Exercise {
@@ -17,32 +26,9 @@ public class Exercise {
     private String difficulty;
     private String type;
 
-    @ManyToMany(mappedBy = "exercises")
-    private List<Routine> routines = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ExerciseRoutine> exerciseRoutine;
 
-    public Exercise() {}
-
-    public Exercise(String name, String description, String duration, String difficulty, String type) {
-        this.name = name;
-        this.description = description;
-        this.duration = duration;
-        this.difficulty = difficulty;
-        this.type = type;
-    }
-
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
-    public String getDuration() { return duration; }
-    public void setDuration(String duration) { this.duration = duration; }
-    public String getDifficulty() { return difficulty; }
-    public void setDifficulty(String difficulty) { this.difficulty = difficulty; }
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
-    public List<Routine> getRoutines() { return routines; }
-    public void setRoutines(List<Routine> routines) { this.routines = routines; }
 
 }

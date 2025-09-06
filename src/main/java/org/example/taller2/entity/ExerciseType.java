@@ -1,24 +1,25 @@
 package org.example.taller2.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "recommendations")
-public class Recommendation {
+@NoArgsConstructor
+@Entity
+@Table(name = "exerciseType")
+public class ExerciseType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String description;
-    private String title;
+
+    @Column(nullable = false, unique = true)
+    private String name;
+
 
 
 }
+

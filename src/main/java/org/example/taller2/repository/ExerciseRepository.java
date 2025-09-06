@@ -1,4 +1,6 @@
 package org.example.taller2.repository;
 
-public class ExerciseRepository {
-}
+import org.example.taller2.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ExerciseRepository extends JpaRepository<User, Long> {}

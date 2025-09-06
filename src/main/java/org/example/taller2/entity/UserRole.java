@@ -1,8 +1,16 @@
 package org.example.taller2.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Table(name = "users_roles")
 public class UserRole {
     @EmbeddedId
@@ -17,29 +25,5 @@ public class UserRole {
     @MapsId("userId")
     @JoinColumn(name = "user_id")
     private User user;
-
-    public UserRoleId getUserRoleId() {
-        return userRoleId;
-    }
-
-    public void setUserRoleId(UserRoleId userRoleId) {
-        this.userRoleId = userRoleId;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
 }
