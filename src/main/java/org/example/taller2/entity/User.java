@@ -37,7 +37,12 @@ public class User {
     private List<UserMessage> userMessages;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<>
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TrainerStudent> trainerStudentsAsStudent;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TrainerStudent> trainerStudentsAsTrainer;
+
 
 }
