@@ -1,9 +1,12 @@
 package org.example.taller2.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,6 +22,9 @@ public class Week {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "week", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Schedule> schedules;
 
 }
 

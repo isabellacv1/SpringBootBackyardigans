@@ -30,5 +30,20 @@ public class Exercise {
     @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ExerciseRoutine> exerciseRoutine;
 
+    @OneToOne(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Video video;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("excerciseTypeId")
+    @JoinColumn(name = "exerciseType_id")
+    private ExerciseType exerciseType;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("dificultyId")
+    @JoinColumn(name = "difficulty_id")
+    private Difficulty exerciseDifficulty;
+
+
 
 }

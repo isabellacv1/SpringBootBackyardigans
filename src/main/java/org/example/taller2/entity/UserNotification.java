@@ -19,4 +19,12 @@ public class UserNotification {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("notificationId")
+    @JoinColumn(name = "notification_id")
+    private Notification notification;
+
+
+
+
 }

@@ -1,10 +1,13 @@
 package org.example.taller2.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -25,6 +28,15 @@ public class ExerciseRoutine {
     @MapsId("exercise_id")
     @JoinColumn(name = "exercise_id")
     private Exercise exercise;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "exerciseRoutine", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Progress> progresses;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("unitId")
+    @JoinColumn(name = "unit_id")
+    private Unit unit;
 
 
 }

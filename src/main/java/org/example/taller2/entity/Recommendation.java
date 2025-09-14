@@ -33,5 +33,10 @@ public class Recommendation {
     @JoinColumn(name = "trainer_id")
     private User trainerUser;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("progressId")
+    @JoinColumn(name = "progress_id")
+    private Progress progress;
+
 
 }

@@ -32,4 +32,17 @@ public class Event {
     private List<EventParticipation> events;
 
 
+    @OneToOne
+    @MapsId("scheduleId")
+    @JoinColumn(name = "schedule_id")
+    private Schedule schedule;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("eventStatusId")
+    @JoinColumn(name = "event_status_id")
+    private EventStatus eventStatus;
+
+
+
 }

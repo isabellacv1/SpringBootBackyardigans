@@ -11,8 +11,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "exerciseType")
-public class ExerciseType {
+@Table(name = "routineVisibility")
+public class RoutineVisibility {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +21,7 @@ public class ExerciseType {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "exerciseType", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Exercise> exercises;
-
+    @OneToMany(mappedBy = "routineVisibility", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserRoutine> userRoutines;
 
 }
-

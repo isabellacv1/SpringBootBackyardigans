@@ -1,9 +1,12 @@
 package org.example.taller2.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,6 +21,11 @@ public class NotificationType {
 
     @Column(nullable = false, unique = true)
     private String name;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "notificationType", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Notification> notifications;
+
 
 
 

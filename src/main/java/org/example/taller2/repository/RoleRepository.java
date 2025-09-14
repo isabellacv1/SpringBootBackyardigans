@@ -1,6 +1,10 @@
 package org.example.taller2.repository;
 
+import org.example.taller2.entity.Role;
 import org.example.taller2.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RoleRepository extends JpaRepository<User, Long> {}
+public interface RoleRepository extends JpaRepository<User, Long> {
+    Role findByName(String role);
+
+}

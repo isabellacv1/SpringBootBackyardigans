@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,6 +20,9 @@ public class EventStatus {
 
     @Column(nullable = false, unique = true)
     private String name;
+
+    @OneToMany(mappedBy = "eventStatus", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Event> events;
 
 
 }
