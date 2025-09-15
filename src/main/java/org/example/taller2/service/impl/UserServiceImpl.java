@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.example.taller2.entity.Role;
 
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,26 +19,70 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleRepository roleRepository;
 
+
     @Override
-    public void createUser(String name, String email, String password, String role){
+    public void createUser(String name, String email, String password, String role) {
 
         Role userRole = roleRepository.findByName(role);
-        
-        if(userRole == null){
+
+        if (userRole == null) {
             throw new IllegalArgumentException("Role not found");
         }
 
-        User user = new User(name,email,password);
 
-        UserRole userRoleObj = new
+        User user = new User(name, email, password);
+        user = userRepository.save(user);
 
-        user.getUserRoles().add(userRole);
-        
+
+        UserRole userRoleObj = new UserRole();
+        userRoleObj.setUser(user);
+        userRoleObj.setRole(userRole);
+
+        user.getUserRoles().add(userRoleObj);
+
         userRepository.save(user);
-        
-
-
-
     }
 
+    @Override
+    public void deleteUser(String userName) {
+        User user = userRepository.findByName(userName);
+        if (user == null) {
+            throw new IllegalArgumentException("User not found");
+        }
+
+        userRepository.delete(user);
+    }
+
+    @Override
+    public void updateUser(String userName, String newEmail, String newPassword, String newRole) {
+        User user = userRepository.findByName(userName);
+        if (user == null) {
+            throw new IllegalArgumentException("User not found");
+        }
+
+        if (newEmail != null && !newEmail.isEmpty()) {
+            user.setEmail(newEmail);
+        }
+        if (newPassword != null && !newPassword.isEmpty()) {
+            user.setPassword(newPassword);
+        }
+
+        if (newRole != null && !newRole.isEmpty()) {
+            Role roleEntity = roleRepository.findByName(newRole);
+            if (roleEntity == null) {
+                throw new IllegalArgumentException("Role not found");
+            }
+
+            user.getUserRoles().clear();
+
+            UserRole userRoleObj = new UserRole();
+            userRoleObj.setUser(user);
+            userRoleObj.setRole(roleEntity);
+            user.getUserRoles().add(userRoleObj);
+        }
+
+        userRepository.save(user);
+    }
 }
+
+

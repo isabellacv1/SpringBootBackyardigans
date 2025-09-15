@@ -4,7 +4,9 @@ import org.example.taller2.entity.Role;
 import org.example.taller2.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RoleRepository extends JpaRepository<User, Long> {
-    Role findByName(String role);
+public interface RoleRepository extends JpaRepository<Role, Long> {
+    Role findByName(String name);
+    Role findById(String roleId);
+
 
 }

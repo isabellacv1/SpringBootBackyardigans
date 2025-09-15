@@ -13,11 +13,13 @@ public class AppController {
     private UserService userService;
 
     public void createUser(String name, String email, String password, String role){
-
         userService.createUser(name,email,password,role);
 
     }
 
+    public void deleteUser(String userName){
+        userService.deleteUser(userName);
+    }
 
 
 }

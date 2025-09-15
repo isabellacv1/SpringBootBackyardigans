@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface PermissionService {
 
-    void createPermission(String name, String description);
+    Permission createPermission(String name, String description);
+    Permission updatePermission(Long id, String newName, String newDescription);
+    void deletePermission(Long id);
 
-    List<Permission> getPermissions();
 }
