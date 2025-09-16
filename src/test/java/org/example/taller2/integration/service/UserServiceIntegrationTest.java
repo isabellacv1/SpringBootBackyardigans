@@ -44,7 +44,7 @@ public class UserServiceIntegrationTest {
         String password = "1234";
 
         // Act
-        userService.createUser(name, email, password, "USER");
+        userService.createUser(name, email, password, "ADMIN");
 
         // Assert
         User savedUser = userRepository.findByName("Isabella");

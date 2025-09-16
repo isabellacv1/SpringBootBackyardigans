@@ -12,7 +12,7 @@ import org.hibernate.annotations.EmbeddableInstantiator;
 @Getter
 @Setter
 @Entity
-@Table(name = "event_participation")
+@Table(name = "event_participations")
 public class EventParticipation {
 
     @EmbeddedId

@@ -30,7 +30,7 @@ public class UserRoutine {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "routine_visibilit_id")
+    @JoinColumn(name = "routine_visibility_id")
     private RoutineVisibility routineVisibility;
 
 }

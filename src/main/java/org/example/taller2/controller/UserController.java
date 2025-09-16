@@ -19,7 +19,7 @@ public class UserController {
 
     @GetMapping("users/create")
     public String createUser() {
-        userService.createUser("Carlos", "carlos@mail.com", "1234", "admin");
+        userService.createUser("Carlos", "carlos@mail.com", "1234", "ADMIN");
         return "Usuario creado";
     }
 

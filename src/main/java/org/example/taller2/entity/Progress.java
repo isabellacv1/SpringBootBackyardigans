@@ -34,8 +34,8 @@ public class Progress {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-            @JoinColumn(name = "exercise_id", referencedColumnName = "exercise_id"),
-            @JoinColumn(name = "routine_id", referencedColumnName = "routine_id")
+            @JoinColumn(name = "exercise_routine_exercise_id", referencedColumnName = "exercise_id"),
+            @JoinColumn(name = "exercise_routine_routine_id", referencedColumnName = "routine_id")
     })
     private ExerciseRoutine exerciseRoutine;
 
