@@ -27,14 +27,18 @@ public class Role {
 
     @JsonIgnore
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserRole> userRoles;
+    private List<UserRole> userRoles = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RolePermission> rolesPermissions;
+    private List<RolePermission> rolesPermissions = new ArrayList<>();
 
     public Role(String description, String name) {
         this.description = description;
         this.name = name;
+    }
+
+    public void addRolePermission(RolePermission rolesPermission) {
+        rolesPermissions.add(rolesPermission);
     }
 }

@@ -23,16 +23,6 @@ public class UserController {
         return "Usuario creado";
     }
 
-    @GetMapping("users")
-    public String getUsers() {
-        StringBuilder sb = new StringBuilder();
-        List<User> users = userRepository.findAll();
-        for (User u : users) {
-            sb.append(u.getName()).append(" - ").append(u.getEmail()).append("\n");
-        }
-        return sb.toString();
-    }
-
     @GetMapping("users/delete")
     public String deleteUser() {
         User user = userRepository.findByName("Carlos");

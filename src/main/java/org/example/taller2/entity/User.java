@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,35 +26,35 @@ public class User {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserRole> userRoles;
+    private List<UserRole> userRoles = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserNotification> userNotifications;
+    private List<UserNotification> userNotifications = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserMessage> userMessages;
+    private List<UserMessage> userMessages = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "studentUser", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TrainerStudent> trainerStudentsAsStudent;
+    private List<TrainerStudent> trainerStudentsAsStudent = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "trainerUser", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TrainerStudent> trainerStudentsAsTrainer;
+    private List<TrainerStudent> trainerStudentsAsTrainer = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EventParticipation> eventParticipations;
+    private List<EventParticipation> eventParticipations = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "trainerUser", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Recommendation> trainerRecommendations;
+    private List<Recommendation> trainerRecommendations = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "studentUser", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Recommendation> studentRecommendations;
+    private List<Recommendation> studentRecommendations = new ArrayList<>();
 
     public User(String name, String email, String password) {
         this.name = name;

@@ -24,16 +24,6 @@ public class PermissionController {
         return "Permiso creado: " + permission.getName();
     }
 
-    @GetMapping("permissions")
-    public String getAllPermissions() {
-        StringBuilder sb = new StringBuilder();
-        List<Permission> permissions = permissionRepository.findAll();
-        for (Permission p : permissions) {
-            sb.append(p.getId()).append(" - ").append(p.getName()).append("\n");
-        }
-        return sb.toString();
-    }
-
     @GetMapping("permissions/delete")
     public String deletePermission() {
         List<Permission> permissions = permissionRepository.findAll();

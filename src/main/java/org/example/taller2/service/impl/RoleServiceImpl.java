@@ -3,11 +3,13 @@ package org.example.taller2.service.impl;
 import org.example.taller2.entity.Permission;
 import org.example.taller2.entity.Role;
 import org.example.taller2.entity.RolePermission;
+import org.example.taller2.entity.RolePermissionId;
 import org.example.taller2.repository.PermissionRepository;
 import org.example.taller2.repository.RoleRepository;
 import org.example.taller2.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -20,46 +22,43 @@ public class RoleServiceImpl implements RoleService {
 
 
     @Override
-    public void createRole(String name, String description, String permission) {
-        Permission rolePermission = permissionRepository.findByName(permission);
-
-        if (rolePermission == null) {
-            throw new IllegalArgumentException("Permission not found");
+    @Transactional
+    public void createRole(String name, String description, String permissionName) {
+        Permission permission = permissionRepository.findByName(permissionName);
+        if (permission == null) {
+            throw new IllegalArgumentException("Permission not found: " + permissionName);
         }
 
-        Role role = new Role(name, description);
-        role = roleRepository.save(role);
+        Role role = new Role(description, name);
 
-        RolePermission rolePermissionObj = new RolePermission();
-        rolePermissionObj.setRole(role);
-        rolePermissionObj.setPermission(rolePermission);
+        RolePermission rolePermission = new RolePermission();
+        rolePermission.setRolePermissionId(new RolePermissionId());
+        rolePermission.setRole(role);
+        rolePermission.setPermission(permission);
 
-        role.getRolesPermissions().add(rolePermissionObj);
+        role.getRolesPermissions().add(rolePermission);
 
         roleRepository.save(role);
     }
 
     @Override
+    @Transactional
     public void deleteRole(Long roleId) {
-        Role role = roleRepository.findById(roleId).orElse(null);
-        if (role == null) {
+        if (!roleRepository.existsById(roleId)) {
             throw new IllegalArgumentException("Role not found");
-
         }
-        roleRepository.delete(role);
+        roleRepository.deleteById(roleId);
     }
 
     @Override
-    public void updateRole(Long roleId, String name, String description, String permission) {
+    @Transactional
+    public void updateRole(Long roleId, String name, String description, String permissionName) {
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new IllegalArgumentException("Role not found"));
 
-        Role role = roleRepository.findById(roleId).orElse(null);
-        if (role == null) {
-            throw new IllegalArgumentException("Role not found");
-        }
-
-        Permission rolePermission = permissionRepository.findByName(permission);
-        if (rolePermission == null) {
-            throw new IllegalArgumentException("Permission not found");
+        Permission permission = permissionRepository.findByName(permissionName);
+        if (permission == null) {
+            throw new IllegalArgumentException("Permission not found: " + permissionName);
         }
 
         role.setName(name);
@@ -67,12 +66,11 @@ public class RoleServiceImpl implements RoleService {
 
         role.getRolesPermissions().clear();
 
-        RolePermission rolePermissionObj = new RolePermission();
-        rolePermissionObj.setRole(role);
-        rolePermissionObj.setPermission(rolePermission);
-        role.getRolesPermissions().add(rolePermissionObj);
+        RolePermission newRolePermission = new RolePermission();
+        newRolePermission.setRolePermissionId(new RolePermissionId());
+        newRolePermission.setRole(role);
+        newRolePermission.setPermission(permission);
 
-        roleRepository.save(role);
+        role.getRolesPermissions().add(newRolePermission);
     }
 }
-

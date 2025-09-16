@@ -10,10 +10,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@TestPropertySource(properties = {"spring.sql.init.mode=never"})
 public class UserServiceIntegrationTest {
 
     @Autowired
@@ -25,63 +30,77 @@ public class UserServiceIntegrationTest {
     @Autowired
     private RoleRepository roleRepository;
 
-    private Role role;
+    private Role basicRole;
 
     @BeforeEach
     void setup() {
-        // Arrange
-        role = new Role();
-        role.setName("user");
-        role.setDescription("Rol de usuario normal");
-        roleRepository.save(role);
+        userRepository.deleteAll();
+        roleRepository.deleteAll();
+        basicRole = new Role("Rol básico", "USER");
+        basicRole = roleRepository.save(basicRole);
     }
 
     @Test
-    void createUser_WhenCalled_ShouldPersistUserAndRole() {
-        // Arrange
-        String name = "Isabella";
-        String email = "isa@example.com";
-        String password = "1234";
-
+    @Transactional
+    void createUser_WhenCalled_ShouldSaveUser() {
         // Act
-        userService.createUser(name, email, password, "ADMIN");
+        userService.createUser("juanperez", "juan@example.com", "1234", "USER");
 
         // Assert
-        User savedUser = userRepository.findByName("Isabella");
-        assertNotNull(savedUser);
-        assertEquals("Isabella", savedUser.getName());
-        assertEquals("isa@example.com", savedUser.getEmail());
-        assertFalse(savedUser.getUserRoles().isEmpty(), "El usuario debería tener al menos un rol asignado");
-
+        User found = userRepository.findByName("juanperez");
+        assertNotNull(found);
+        assertEquals("juan@example.com", found.getEmail());
+        assertEquals("1234", found.getPassword());
+        assertFalse(found.getUserRoles().isEmpty());
+        assertEquals("USER", found.getUserRoles().iterator().next().getRole().getName());
     }
 
     @Test
-    void createUser_WithNonExistentRole_ShouldThrowException() {
+    @Transactional
+    void updateUser_WhenCalled_ShouldUpdateUserAndRole() {
         // Arrange
-        String name = "Andres";
-        String email = "andres@example.com";
-        String password = "1234";
+        userService.createUser("mariagomez", "maria@example.com", "pass", "USER");
+        Role adminRole = new Role("Administrador", "ADMIN");
+        roleRepository.save(adminRole);
 
-        // Act + Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            userService.createUser(name, email, password, "no-existe");
-        });
+        // Act
+        userService.updateUser("mariagomez", "mariaupdated@example.com", "newpass", "ADMIN");
+
+        // Assert
+        User found = userRepository.findByName("mariagomez");
+        assertNotNull(found);
+        assertEquals("mariaupdated@example.com", found.getEmail());
+        assertEquals("newpass", found.getPassword());
+        assertEquals("ADMIN", found.getUserRoles().iterator().next().getRole().getName());
     }
 
     @Test
     void deleteUser_WhenCalled_ShouldRemoveUser() {
         // Arrange
-        User user = new User();
-        user.setName("Carlos");
-        user.setEmail("carlos@example.com");
-        user.setPassword("1234");
-        userRepository.save(user);
+        userService.createUser("carlossoto", "carlos@example.com", "mypassword", "USER");
 
         // Act
-        userRepository.delete(userRepository.findByName("Carlos"));
+        userService.deleteUser("carlossoto");
 
         // Assert
-        assertNull(userRepository.findByName("Carlos"));
+        User found = userRepository.findByName("carlossoto");
+        assertNull(found);
+    }
+
+    @Test
+    void createUser_WhenRoleNotFound_ShouldThrowException() {
+        // Assert
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                userService.createUser("pepito", "pepito@example.com", "1234", "NO_EXISTE"));
+        assertEquals("Role not found", exception.getMessage());
+    }
+
+    @Test
+    void updateUser_WhenUserNotFound_ShouldThrowException() {
+        // Assert
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                userService.updateUser("noexiste", "email", "pass", "USER"));
+        assertEquals("User not found", exception.getMessage());
     }
 
     @AfterEach
