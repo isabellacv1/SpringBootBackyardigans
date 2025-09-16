@@ -20,12 +20,12 @@ public class ExerciseRoutine {
     private ExerciseRoutineId exerciseRoutineId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("routine_id")
+    @MapsId("routineId")
     @JoinColumn(name = "routine_id")
     private Routine routine;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("exercise_id")
+    @MapsId("exerciseId")
     @JoinColumn(name = "exercise_id")
     private Exercise exercise;
 
@@ -34,7 +34,6 @@ public class ExerciseRoutine {
     private List<Progress> progresses;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("unitId")
     @JoinColumn(name = "unit_id")
     private Unit unit;
 

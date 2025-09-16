@@ -3,17 +3,21 @@ package org.example.taller2.integration.service;
 import org.example.taller2.entity.Permission;
 import org.example.taller2.repository.PermissionRepository;
 import org.example.taller2.service.PermissionService;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
+
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@TestPropertySource(properties = {"spring.sql.init.mode=never"})
 public class PermissionServiceIntegrationTest {
 
     @Autowired

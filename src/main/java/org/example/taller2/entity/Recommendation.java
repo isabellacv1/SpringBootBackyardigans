@@ -14,9 +14,7 @@ import lombok.Setter;
 @Table(name = "recommendations")
 public class Recommendation {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
     private String description;
     private String title;
 

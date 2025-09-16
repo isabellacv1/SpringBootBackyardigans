@@ -30,7 +30,6 @@ public class UserRoutine {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("routineVisibilityId")
     @JoinColumn(name = "routine_visibilit_id")
     private RoutineVisibility routineVisibility;
 

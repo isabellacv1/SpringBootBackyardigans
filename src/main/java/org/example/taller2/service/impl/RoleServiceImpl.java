@@ -21,7 +21,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void createRole(String name, String description, String permission) {
-        Permission rolePermission = permissionRepository.findById(permission);
+        Permission rolePermission = permissionRepository.findByName(permission);
 
         if (rolePermission == null) {
             throw new IllegalArgumentException("Permission not found");
@@ -57,7 +57,7 @@ public class RoleServiceImpl implements RoleService {
             throw new IllegalArgumentException("Role not found");
         }
 
-        Permission rolePermission = permissionRepository.findById(permission);
+        Permission rolePermission = permissionRepository.findByName(permission);
         if (rolePermission == null) {
             throw new IllegalArgumentException("Permission not found");
         }

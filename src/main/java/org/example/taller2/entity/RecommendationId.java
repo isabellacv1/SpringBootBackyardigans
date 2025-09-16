@@ -1,8 +1,11 @@
 package org.example.taller2.entity;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Embeddable
 public class RecommendationId implements Serializable {
     @Column(name = "studentId")
     private Long studentId;

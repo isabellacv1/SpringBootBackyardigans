@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "schedule")
+@Table(name = "schedules")
 public class Schedule {
 
     @Id
@@ -24,6 +24,9 @@ public class Schedule {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "week_id")
     private Week week;
+
+    @OneToOne(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Event event;
 
 
 }

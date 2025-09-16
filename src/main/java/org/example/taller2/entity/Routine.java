@@ -1,5 +1,6 @@
 package org.example.taller2.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class Routine {
     private Integer id;
     private Date date;
 
-    @OneToMany(mappedBy = "user",  cascade = CascadeType.ALL,  orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(mappedBy = "routine",  cascade = CascadeType.ALL,  orphanRemoval = true)
     private List<UserRoutine> userRoutineList;
 }

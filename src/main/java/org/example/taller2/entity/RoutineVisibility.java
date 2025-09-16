@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "routineVisibility")
+@Table(name = "routineVisibilities")
 public class RoutineVisibility {
 
     @Id

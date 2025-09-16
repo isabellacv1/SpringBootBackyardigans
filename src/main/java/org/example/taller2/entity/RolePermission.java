@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table
+@Table(name = "role_permissions")
 public class RolePermission {
 
     @EmbeddedId

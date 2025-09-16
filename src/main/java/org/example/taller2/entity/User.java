@@ -36,23 +36,23 @@ public class User {
     private List<UserMessage> userMessages;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "studentUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TrainerStudent> trainerStudentsAsStudent;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "trainerUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TrainerStudent> trainerStudentsAsTrainer;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EventParticipation> eventParticipations;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "trainerUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Recommendation> trainerRecommendations;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "studentUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Recommendation> studentRecommendations;
 
     public User(String name, String email, String password) {

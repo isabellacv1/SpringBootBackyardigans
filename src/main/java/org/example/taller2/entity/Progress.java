@@ -17,10 +17,11 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name="progress")
+@Table(name="progresses")
 public class Progress {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer repetitions;
     private Integer time;
@@ -31,15 +32,15 @@ public class Progress {
     @OneToMany(mappedBy = "progress", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Recommendation> recommendations;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("exerciseRoutineId")
-    @JoinColumn(name = "exercise_routine_id")
+    @JoinColumns({
+            @JoinColumn(name = "exercise_id", referencedColumnName = "exercise_id"),
+            @JoinColumn(name = "routine_id", referencedColumnName = "routine_id")
+    })
     private ExerciseRoutine exerciseRoutine;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("effortId")
     @JoinColumn(name = "effort_id")
     private Effort effort;
 

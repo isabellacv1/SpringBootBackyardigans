@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "week")
+@Table(name = "weeks")
 public class Week {
 
     @Id

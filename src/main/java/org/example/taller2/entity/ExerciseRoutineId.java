@@ -1,6 +1,7 @@
 package org.example.taller2.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Getter
 @Setter
+@Embeddable
 public class ExerciseRoutineId implements Serializable {
     @Column(name= "exercise_id")
     private Integer exerciseId;
