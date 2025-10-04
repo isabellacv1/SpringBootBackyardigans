@@ -53,9 +53,9 @@ public class RoleServiceIntegrationTest {
         Role foundRole = roleRepository.findByName("ADMIN");
         assertNotNull(foundRole);
         assertEquals("Administrador del sistema", foundRole.getDescription());
-        assertFalse(foundRole.getRolesPermissions().isEmpty());
+        assertFalse(foundRole.getRolePermissions().isEmpty());
         assertEquals(permission.getName(),
-                foundRole.getRolesPermissions().iterator().next().getPermission().getName());
+                foundRole.getRolePermissions().iterator().next().getPermission().getName());
     }
 
     @Test
@@ -77,9 +77,9 @@ public class RoleServiceIntegrationTest {
         Role updatedRole = roleRepository.findByName("UserUpdated");
         assertNotNull(updatedRole);
         assertEquals("Usuario avanzado", updatedRole.getDescription());
-        assertEquals(1, updatedRole.getRolesPermissions().size());
+        assertEquals(1, updatedRole.getRolePermissions().size());
         assertEquals(newPermission.getName(),
-                updatedRole.getRolesPermissions().iterator().next().getPermission().getName());
+                updatedRole.getRolePermissions().iterator().next().getPermission().getName());
     }
 
     @Test

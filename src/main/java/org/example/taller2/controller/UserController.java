@@ -1,11 +1,19 @@
 package org.example.taller2.controller;
 
+import org.example.taller2.dto.FlashMessage;
 import org.example.taller2.entity.User;
 import org.example.taller2.repository.UserRepository;
+import org.example.taller2.security.CustomUserDetails;
 import org.example.taller2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -17,35 +25,31 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("users/create")
-    public String createUser() {
-        userService.createUser("Carlos", "carlos@mail.com", "1234", "ADMIN");
-        return "Usuario creado";
+    @GetMapping("/update")
+    public String update(Model model, Authentication auth) {
+        CustomUserDetails user = (CustomUserDetails) auth.getPrincipal();
+        model.addAttribute("user", user);
+        return "auth/update";
     }
 
-    @GetMapping("users/delete")
-    public String deleteUser() {
-        User user = userRepository.findByName("Carlos");
-        if (user != null) {
-            userService.deleteUser("Carlos");
-            return "Usuario Carlos eliminado";
-        }
-        return "Usuario no encontrado";
+    @PostMapping("/update")
+    public String update(@ModelAttribute User user, RedirectAttributes redirectAttributes) {
+        FlashMessage message = userService.updateUser(user);
+        redirectAttributes.addFlashAttribute("message", message);
+        return "redirect:/user/profile";
     }
 
-    @GetMapping("users/update")
-    public String updateUser() {
-        User user = userRepository.findByName("Carlos");
-        if (user == null) {
-            return "Usuario Carlos no existe para actualizar";
-        }
-
-        String newEmail = "carlos.updated@mail.com";
-        String newPassword = "nuevoPass";
-        String newRole = "admin";
-
-        userService.updateUser(user.getName(), newEmail, newPassword, newRole);
-
-        return "Usuario actualizado: " + user.getName();
+    @GetMapping("/delete")
+    public String delete(Model model) {
+        model.addAttribute("user", new User());
+        return "auth/delete";
     }
+
+    @PostMapping("/delete")
+    public String delete(@ModelAttribute User user) {
+        userService.deleteUser(user.getName());
+        return "redirect:/auth/login";
+    }
+
+
 }

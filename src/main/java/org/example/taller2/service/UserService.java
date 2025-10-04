@@ -1,7 +1,12 @@
 package org.example.taller2.service;
 
+import org.example.taller2.dto.FlashMessage;
+import org.example.taller2.entity.User;
+
 public interface UserService {
-    void createUser(String name, String email, String password, String role);
+    FlashMessage createUser(User user);
     void deleteUser(String userName);
-    void updateUser(String userName, String newEmail, String newPassword, String newRole);
+    FlashMessage updateUser(User user);
+
+    User findByUsername(String username);
 }

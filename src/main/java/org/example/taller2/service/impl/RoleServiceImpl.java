@@ -36,7 +36,7 @@ public class RoleServiceImpl implements RoleService {
         rolePermission.setRole(role);
         rolePermission.setPermission(permission);
 
-        role.getRolesPermissions().add(rolePermission);
+        role.getRolePermissions().add(rolePermission);
 
         roleRepository.save(role);
     }
@@ -64,13 +64,13 @@ public class RoleServiceImpl implements RoleService {
         role.setName(name);
         role.setDescription(description);
 
-        role.getRolesPermissions().clear();
+        role.getRolePermissions().clear();
 
         RolePermission newRolePermission = new RolePermission();
         newRolePermission.setRolePermissionId(new RolePermissionId());
         newRolePermission.setRole(role);
         newRolePermission.setPermission(permission);
 
-        role.getRolesPermissions().add(newRolePermission);
+        role.getRolePermissions().add(newRolePermission);
     }
 }

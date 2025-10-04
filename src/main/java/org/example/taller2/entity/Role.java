@@ -2,15 +2,11 @@ package org.example.taller2.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @NoArgsConstructor
@@ -31,7 +27,7 @@ public class Role {
 
     @JsonIgnore
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RolePermission> rolesPermissions = new ArrayList<>();
+    private List<RolePermission> rolePermissions = new ArrayList<>();
 
     public Role(String description, String name) {
         this.description = description;
@@ -39,6 +35,8 @@ public class Role {
     }
 
     public void addRolePermission(RolePermission rolesPermission) {
-        rolesPermissions.add(rolesPermission);
+        rolePermissions.add(rolesPermission);
     }
+
+
 }
