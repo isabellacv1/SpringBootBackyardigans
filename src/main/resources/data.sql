@@ -1,16 +1,16 @@
 -- Tabla: permissions
-INSERT INTO permissions (id, name, description) VALUES
-(1, 'READ_PROFILE', 'Permiso para leer perfiles de usuario'),
-(2, 'WRITE_PROFILE', 'Permiso para editar perfiles de usuario'),
-(3, 'ADMIN_ACCESS', 'Acceso completo a todas las funcionalidades de administrador'),
-(4, 'MANAGE_ROUTINES', 'Permiso para crear, editar y eliminar rutinas'),
-(5, 'VIEW_REPORTS', 'Permiso para ver reportes de progreso');
+INSERT INTO permissions (name, description) VALUES
+('READ_PROFILE', 'Permiso para leer perfiles de usuario'),
+('WRITE_PROFILE', 'Permiso para editar perfiles de usuario'),
+('ADMIN_ACCESS', 'Acceso completo a todas las funcionalidades de administrador'),
+('MANAGE_ROUTINES', 'Permiso para crear, editar y eliminar rutinas'),
+('VIEW_REPORTS', 'Permiso para ver reportes de progreso');
 
 -- Tabla: roles
-INSERT INTO roles (id, name, description) VALUES
-(1, 'ADMIN', 'Rol de Administrador con todos los permisos'),
-(2, 'TRAINER', 'Rol para entrenadores'),
-(3, 'USER', 'Rol para usuarios estándar de la aplicación');
+INSERT INTO roles (name, description) VALUES
+('ADMIN', 'Rol de Administrador con todos los permisos'),
+('TRAINER', 'Rol para entrenadores'),
+('USER', 'Rol para usuarios estándar de la aplicación');
 
 -- Tabla: role_permission
 -- Rol ADMIN (1) tiene todos los permisos (1, 2, 3, 4, 5)
@@ -28,17 +28,17 @@ INSERT INTO role_permissions (role_id, permission_id) VALUES
 (3, 1);
 
 -- Tabla: users
-INSERT INTO users (id, name, email, password) VALUES
-(1, 'Admin User', 'admin@fitness.com', '{noop}adminpass'),
-(2, 'Trainer Uno', 'trainer.one@fitness.com', '{noop}trainerpass'),
-(3, 'Trainer Dos', 'trainer.two@fitness.com', '{noop}trainerpass'),
-(4, 'John Doe', 'john.doe@example.com', '{noop}userpass'),
-(5, 'Jane Smith', 'jane.smith@example.com', '{noop}userpass'),
-(6, 'Peter Jones', 'peter.jones@example.com', '{noop}userpass'),
-(7, 'Mary Williams', 'mary.williams@example.com', '{noop}userpass'),
-(8, 'David Brown', 'david.brown@example.com', '{noop}userpass'),
-(9, 'Susan Davis', 'susan.davis@example.com', '{noop}userpass'),
-(10, 'Robert Miller', 'robert.miller@example.com', '{noop}userpass');
+INSERT INTO users (name, email, password) VALUES
+('Admin User', 'admin@fitness.com', '$2b$10$5ysgXZUJi7MkJWhEhFcZTObGe18G1G.0rnXkewEtXq6ebVx1qpjYW'),
+('Trainer Uno', 'trainer.one@fitness.com', '$2b$10$5ysgXZUJi7MkJWhEhFcZTObGe18G1G.0rnXkewEtXq6ebVx1qpjYW'),
+('Trainer Dos', 'trainer.two@fitness.com', '$2b$10$5ysgXZUJi7MkJWhEhFcZTObGe18G1G.0rnXkewEtXq6ebVx1qpjYW'),
+('John Doe', 'john.doe@example.com', '$2b$10$5ysgXZUJi7MkJWhEhFcZTObGe18G1G.0rnXkewEtXq6ebVx1qpjYW'),
+('Jane Smith', 'jane.smith@example.com', '$2b$10$5ysgXZUJi7MkJWhEhFcZTObGe18G1G.0rnXkewEtXq6ebVx1qpjYW'),
+('Peter Jones', 'peter.jones@example.com', '$2b$10$5ysgXZUJi7MkJWhEhFcZTObGe18G1G.0rnXkewEtXq6ebVx1qpjYW'),
+('Mary Williams', 'mary.williams@example.com', '$2b$10$5ysgXZUJi7MkJWhEhFcZTObGe18G1G.0rnXkewEtXq6ebVx1qpjYW'),
+('David Brown', 'david.brown@example.com', '$2b$10$5ysgXZUJi7MkJWhEhFcZTObGe18G1G.0rnXkewEtXq6ebVx1qpjYW'),
+('Susan Davis', 'susan.davis@example.com', '$2b$10$5ysgXZUJi7MkJWhEhFcZTObGe18G1G.0rnXkewEtXq6ebVx1qpjYW'),
+('Robert Miller', 'robert.miller@example.com', '$2b$10$5ysgXZUJi7MkJWhEhFcZTObGe18G1G.0rnXkewEtXq6ebVx1qpjYW');
 
 -- Tabla: users_roles
 -- Admin User (1) es ADMIN (1) y TRAINER (2)
@@ -58,27 +58,27 @@ INSERT INTO users_roles (user_id, role_id) VALUES
 (10, 3);
 
 -- Tablas de catálogo
-INSERT INTO difficulties (id, name) VALUES (1, 'Beginner'), (2, 'Intermediate'), (3, 'Advanced');
-INSERT INTO efforts (id, name) VALUES (1, 'Low'), (2, 'Medium'), (3, 'High');
-INSERT INTO event_status (id, name) VALUES (1, 'Scheduled'), (2, 'Completed'), (3, 'Cancelled');
-INSERT INTO exercise_types (id, name) VALUES (1, 'Cardio'), (2, 'Strength'), (3, 'Flexibility');
-INSERT INTO notification_types (id, name) VALUES (1, 'System Alert'), (2, 'New Message'), (3, 'Workout Reminder');
-INSERT INTO routine_visibilities (id, name) VALUES (1, 'Public'), (2, 'Private'), (3, 'FriendsOnly');
-INSERT INTO units (id, name) VALUES (1, 'Repetitions'), (2, 'Seconds'), (3, 'Minutes'), (4, 'Kilograms');
-INSERT INTO weeks (id, name) VALUES (1, 'Monday'), (2, 'Tuesday'), (3, 'Wednesday'), (4, 'Thursday'), (5, 'Friday'), (6, 'Saturday'), (7, 'Sunday');
+INSERT INTO difficulties (name) VALUES ('Beginner'), ('Intermediate'), ('Advanced');
+INSERT INTO efforts (name) VALUES ('Low'), ('Medium'), ('High');
+INSERT INTO event_status (name) VALUES ('Scheduled'), ('Completed'), ('Cancelled');
+INSERT INTO exercise_types (name) VALUES ('Cardio'), ('Strength'), ('Flexibility');
+INSERT INTO notification_types (name) VALUES ('System Alert'), ('New Message'), ('Workout Reminder');
+INSERT INTO routine_visibilities (name) VALUES ('Public'), ('Private'), ('FriendsOnly');
+INSERT INTO units (name) VALUES ('Repetitions'), ('Seconds'), ('Minutes'), ('Kilograms');
+INSERT INTO weeks (name) VALUES ('Monday'), ('Tuesday'), ('Wednesday'), ('Thursday'), ('Friday'), ('Saturday'), ('Sunday');
 
 -- Tabla: exercises
-INSERT INTO exercises (id, name, description, duration, exercise_type_id, difficulty_id) VALUES
-(1, 'Push-ups', 'A classic bodyweight exercise for chest, shoulders, and triceps.', '30 seconds', 2, 2),
-(2, 'Squats', 'A fundamental lower body exercise.', '45 seconds', 2, 1),
-(3, 'Jumping Jacks', 'A full-body cardio exercise.', '60 seconds', 1, 1),
-(4, 'Plank', 'Core stability exercise.', '60 seconds', 2, 2),
-(5, 'Hamstring Stretch', 'A key stretch for lower body flexibility.', '30 seconds per leg', 3, 1);
+INSERT INTO exercises (name, description, duration, exercise_type_id, difficulty_id) VALUES
+('Push-ups', 'A classic bodyweight exercise for chest, shoulders, and triceps.', '30 seconds', 2, 2),
+('Squats', 'A fundamental lower body exercise.', '45 seconds', 2, 1),
+('Jumping Jacks', 'A full-body cardio exercise.', '60 seconds', 1, 1),
+('Plank', 'Core stability exercise.', '60 seconds', 2, 2),
+('Hamstring Stretch', 'A key stretch for lower body flexibility.', '30 seconds per leg', 3, 1);
 
 -- Tabla: routines
-INSERT INTO routines (id, date) VALUES
-(1, '2025-09-15'),
-(2, '2025-09-16');
+INSERT INTO routines (date) VALUES
+('2025-09-15'),
+('2025-09-16');
 
 -- Tabla: users_routines (Asignar rutinas a usuarios)
 -- Trainer Uno (2) crea la rutina 1 (pública)
@@ -98,8 +98,8 @@ INSERT INTO exercises_routines (routine_id, exercise_id, unit_id) VALUES
 
 -- Tabla: progress
 -- John Doe (4) registra progreso en Push-ups (ejercicio 1) de la rutina 1
-INSERT INTO progresses (id, repetitions, time, date, exercise_routine_routine_id, exercise_routine_exercise_id, effort_id) VALUES
-(1, 15, 0, '2025-09-15', 1, 1, 2); -- 15 reps, Medium effort
+INSERT INTO progresses (repetitions, time, date, exercise_routine_routine_id, exercise_routine_exercise_id, effort_id) VALUES
+(15, 0, '2025-09-15', 1, 1, 2); -- 15 reps, Medium effort
 
 -- Tabla: trainer_students
 -- Trainer Uno (2) entrena a John Doe (4) y Jane Smith (5)
@@ -108,8 +108,8 @@ INSERT INTO trainer_students (trainer_id, student_id) VALUES
 (2, 5);
 
 -- Tabla: messages
-INSERT INTO messages (id, title, body, date, is_read) VALUES
-(1, 'Welcome!', 'Welcome to the platform, John!', '2025-09-14 10:00:00', false);
+INSERT INTO messages (title, body, date, is_read) VALUES
+('Welcome!', 'Welcome to the platform, John!', '2025-09-14 10:00:00', false);
 
 -- Tabla: user_messages
 -- Mensaje de Admin (1) para John Doe (4)
@@ -118,8 +118,8 @@ INSERT INTO user_messages (user_id, message_id) VALUES
 (4, 1);
 
 -- Tabla: notifications
-INSERT INTO notifications (id, title, body, date, is_read, notification_type_id) VALUES
-(1, 'New Routine Assigned', 'Trainer Uno has assigned you a new routine.', '2025-09-15 09:00:00', false, 3);
+INSERT INTO notifications (title, body, date, is_read, notification_type_id) VALUES
+('New Routine Assigned', 'Trainer Uno has assigned you a new routine.', '2025-09-15 09:00:00', false, 3);
 
 -- Tabla: user_notifications
 -- Notificación para John Doe (4)
@@ -127,35 +127,15 @@ INSERT INTO user_notifications (user_id, notification_id) VALUES
 (4, 1);
 
 -- Tabla: schedule
-INSERT INTO schedules (id, start_hour, end_hour, week_id) VALUES
-(1, '2025-09-15 18:00:00', '2025-09-15 19:00:00', 1); -- Lunes 6-7 PM
+INSERT INTO schedules (start_hour, end_hour, week_id) VALUES
+('2025-09-15 18:00:00', '2025-09-15 19:00:00', 1); -- Lunes 6-7 PM
 
 -- Tabla: events
-INSERT INTO events (id, start_date, end_date, place, type, place_capacity, schedule_id, event_status_id) VALUES
-(1, '2025-09-22 18:00:00', '2025-09-22 19:00:00', 'Main Gym', 'Group Cardio', '25', 1, 1);
+INSERT INTO events (start_date, end_date, place, type, place_capacity, schedule_id, event_status_id) VALUES
+('2025-09-22 18:00:00', '2025-09-22 19:00:00', 'Main Gym', 'Group Cardio', '25', 1, 1);
 
 -- Tabla: event_participation
 -- John Doe (4) y Jane Smith (5) participan en el evento 1
 INSERT INTO event_participations (student_id, event_id) VALUES
 (4, 1),
 (5, 1);
-
--- Reiniciar las secuencias de autoincremento para evitar conflictos de ID
-ALTER TABLE permissions ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE roles ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE users ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE difficulties ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE efforts ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE event_status ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE exercise_types ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE notification_types ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE routine_visibilities ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE units ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE weeks ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE exercises ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE routines ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE progresses ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE messages ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE notifications ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE schedules ALTER COLUMN id RESTART WITH 100;
-ALTER TABLE events ALTER COLUMN id RESTART WITH 100;

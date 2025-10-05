@@ -190,3 +190,185 @@ select.control{ cursor:pointer; }
     border:1px solid rgba(120,150,255,.3);
     color:var(--primary-100);
 }
+
+/* ====== Tabla glass compacta ====== */
+.table{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: linear-gradient(180deg, rgba(18,30,60,.45), rgba(14,24,48,.38));
+    border: 1px solid rgba(120,150,255,.18);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(8,20,60,.25), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.table thead th{
+    text-align: left;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .2px;
+    color: var(--primary-100);
+    padding: 10px 12px;              /* más compacto */
+    background: rgba(25,45,95,.35);
+    border-bottom: 1px solid rgba(120,150,255,.22);
+    white-space: nowrap;
+}
+.table tbody td{
+    padding: 9px 12px;                /* más compacto */
+    font-size: 14px;
+    color: var(--text);
+    border-bottom: 1px solid rgba(120,150,255,.12);
+}
+.table tbody tr:last-child td{
+    border-bottom: 0;
+}
+.table tbody tr:hover{
+    background: linear-gradient(180deg, rgba(28,49,112,.28), rgba(20,36,72,.24));
+}
+
+/* Variante de tabla aún más compacta si la necesitas */
+.table--compact thead th{ padding: 8px 10px; }
+.table--compact tbody td{ padding: 7px 10px; font-size: 13.5px; }
+
+/* Columnas utilitarias */
+.col-id{ width: 64px; }
+.col-actions{ width: 240px; }      /* ajusta según necesites */
+
+/* Agrupación de botones dentro de la celda de acciones */
+.table-actions{
+    display: flex;
+    gap: 8px;                         /* separación pequeña */
+    align-items: center;
+    flex-wrap: wrap;                  /* permite romper línea en pantallas chicas */
+}
+
+/* ====== Botones compactos para tabla ====== */
+.btn{ /* ya lo tienes, pero aquí NO tocamos el tamaño base */ }
+
+.btn--sm{
+    padding: 8px 12px;                /* más delgado */
+    border-radius: 10px;
+    font-weight: 600;
+    box-shadow: none;                 /* sin sombra grande en tabla */
+}
+.btn--primary.btn--sm{
+    background: linear-gradient(180deg, rgba(80,140,255,.85), rgba(42,98,255,.92));
+    border: 1px solid rgba(128,167,255,.42);
+}
+.btn--ghost.btn--sm{
+    border: 1px solid rgba(128,167,255,.22);
+}
+
+/* En celdas de acciones, que los links no expandan toda la fila */
+.table .actions, .table .table-actions a, .table .table-actions .btn{
+    display: inline-flex;
+}
+
+/* Mejor legibilidad de celdas largas */
+.td-ellipsis{
+    max-width: 320px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Responsive: en pantallas estrechas hacemos las filas más altas y dejamos romper mail */
+@media (max-width: 860px){
+    .col-actions{ width: 100%; }
+    .td-ellipsis{ max-width: 180px; white-space: normal; }
+}
+
+/* ====== Tags ====== */
+.tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.tag--role {
+    background: rgba(37, 99, 255, 0.2);
+    border: 1px solid rgba(100, 130, 255, 0.3);
+    color: var(--primary-100);
+}
+
+.tag--pending {
+    background: rgba(255, 165, 0, 0.2);
+    border: 1px solid rgba(255, 165, 0, 0.4);
+    color: #ffc966;
+}
+
+/* ====== Disabled Button ====== */
+.btn--disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ====== Checkbox Group ====== */
+.checkbox-group {
+    display: grid;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(143, 170, 255, 0.1);
+    cursor: pointer;
+    transition: background .18s ease, border-color .18s ease;
+}
+
+.checkbox-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(143, 170, 255, 0.2);
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-500);
+    cursor: pointer;
+}
+
+.checkbox-item label {
+    font-weight: 600;
+    color: var(--primary-100);
+    cursor: pointer;
+}
+
+/* ====== Flash Messages ====== */
+.flash-message {
+    padding: 14px;
+    border-radius: var(--radius-lg);
+    margin-bottom: 16px;
+    font-weight: 600;
+    border: 1px solid;
+}
+
+.flash-message--warning {
+    background-color: rgba(255, 165, 0, 0.1);
+    border-color: rgba(255, 165, 0, 0.3);
+    color: #ffc966;
+}
+
+.flash-message--error {
+    background-color: rgba(255, 90, 122, 0.1);
+    border-color: rgba(255, 90, 122, 0.3);
+    color: var(--danger);
+}
+
+.flash-message--success {
+    background-color: rgba(37, 99, 255, 0.1);
+    border-color: rgba(37, 99, 255, 0.3);
+    color: var(--primary-100);
+}

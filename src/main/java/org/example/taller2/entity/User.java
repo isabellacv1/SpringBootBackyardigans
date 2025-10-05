@@ -24,8 +24,8 @@ public class User {
     private String email;
     private String password;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+        @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<UserRole> userRoles = new ArrayList<>();
 
     @JsonIgnore

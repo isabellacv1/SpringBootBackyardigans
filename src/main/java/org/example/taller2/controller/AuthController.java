@@ -4,6 +4,7 @@ import org.example.taller2.dto.FlashMessage;
 import org.example.taller2.entity.User;
 import org.example.taller2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,11 @@ public class AuthController {
         FlashMessage message = userService.createUser(user);
         redirectAttributes.addFlashAttribute("message", message);
         return "redirect:/auth/login";
+    }
+
+    @GetMapping("/pending-approval")
+    public String pending(Model model, Authentication auth) {
+        return "/auth/pending-approval";
     }
 
 

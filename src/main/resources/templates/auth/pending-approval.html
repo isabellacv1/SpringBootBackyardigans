@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Aprobación Pendiente</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="card" style="max-width: 560px;">
+    <span class="badge badge--title">Cuenta Pendiente</span>
+    <h1>Tu cuenta está pendiente de aprobación</h1>
+    <p class="sub">Has sido registrado exitosamente, pero un administrador necesita asignarte un rol antes de que puedas acceder a la aplicación.</p>
+    <p class="sub">Por favor, sé paciente. Serás notificado cuando tu cuenta sea aprobada.</p>
+
+    <form th:action="@{/logout}" method="post" style="margin-top: 20px;">
+        <button type="submit" class="btn btn--primary">Volver al Inicio de Sesión</button>
+    </form>
+</div>
+</body>
+</html>

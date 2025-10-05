@@ -26,7 +26,7 @@ public class Role {
     private List<UserRole> userRoles = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<RolePermission> rolePermissions = new ArrayList<>();
 
     public Role(String description, String name) {

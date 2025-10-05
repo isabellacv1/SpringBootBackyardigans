@@ -3,6 +3,7 @@ package org.example.taller2.security;
 import org.example.taller2.entity.RolePermission;
 import org.example.taller2.entity.User;
 import org.example.taller2.entity.UserRole;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,9 +19,12 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (user.getUserRoles().isEmpty()) {
+            throw new DisabledException("User has no roles assigned");
+        }
 
         var rolesAuthorities = user.getUserRoles().stream().map(
-                userRole -> new SimpleGrantedAuthority(userRole.getRole().getName())
+                userRole -> new SimpleGrantedAuthority("ROLE_" + userRole.getRole().getName())
         ).toList();
 
         var rolesOfUser = user.getUserRoles().stream()
@@ -39,7 +43,7 @@ public class CustomUserDetails implements UserDetails {
 
         var fullAuthorities = new ArrayList<SimpleGrantedAuthority>();
         fullAuthorities.addAll(rolesAuthorities);
-        fullAuthorities.addAll(rolesAuthorities);
+        fullAuthorities.addAll(permissionAuthorities);
 
         return fullAuthorities;
     }

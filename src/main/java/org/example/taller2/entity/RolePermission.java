@@ -17,12 +17,12 @@ public class RolePermission {
     @EmbeddedId
     private RolePermissionId rolePermissionId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("roleId")
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("permissionId")
     @JoinColumn(name = "permission_id")
     private Permission permission;

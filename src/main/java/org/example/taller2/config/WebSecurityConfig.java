@@ -1,5 +1,8 @@
 package org.example.taller2.config;
 
+import org.example.taller2.security.CustomAuthenticationFailureHandler;
+import org.example.taller2.security.CustomAuthenticationSuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -12,15 +15,20 @@ import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
 @Configuration
-@EnableMethodSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
+
+    @Autowired
+    private CustomAuthenticationSuccessHandler successHandler;
+
+    @Autowired
+    private CustomAuthenticationFailureHandler failureHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    //1
     @Bean
     @Order(1)
     public SecurityFilterChain h2SecurityFilterChain(HttpSecurity http) throws Exception {
@@ -37,15 +45,18 @@ public class WebSecurityConfig {
                 );
         return http.build();
     }
+
     @Bean
     @Order(2)
     public SecurityFilterChain appSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/signup", "/css/**").permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/auth/signup", "/css/**", "/auth/pending-approval", "/auth/login*").permitAll()
                 .anyRequest().authenticated()
         ).formLogin(login -> login
                 .loginPage("/auth/login")
-                .defaultSuccessUrl("/user/me", true)
+                .successHandler(successHandler)
+                .failureHandler(failureHandler)
                 .permitAll()
         ).logout(logout -> logout
                 .logoutUrl("/logout")

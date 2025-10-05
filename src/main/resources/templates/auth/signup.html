@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Usuarios</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="card" style="max-width:520px;">
+    <span class="badge badge--title">Registro</span>
+    <h1>Crear cuenta</h1>
+    <p class="sub">Completa los campos para registrarte en el sistema.</p>
+
+    <form method="post" th:action="@{/auth/signup}" th:object="${user}">
+        <div class="field">
+            <label for="name">Nombre</label>
+            <input id="name" class="control" type="text" th:field="*{name}" placeholder="Tu nombre completo" required>
+        </div>
+
+        <div class="field">
+            <label for="email">Correo electrónico</label>
+            <input id="email" class="control" type="email" th:field="*{email}" placeholder="tu@correo.com" required>
+        </div>
+
+        <div class="field">
+            <label for="password">Contraseña</label>
+            <input id="password" class="control" type="password" th:field="*{password}" placeholder="••••••••" required>
+        </div>
+
+        <div class="actions">
+            <button type="submit" class="btn btn--primary">Registrar</button>
+            <button type="reset" class="btn btn--ghost">Limpiar</button>
+        </div>
+    </form>
+
+    <p class="sub" style="margin-top:20px;">
+        ¿Ya tienes cuenta?
+        <a th:href="@{/auth/login}" style="color:var(--primary-400); text-decoration:none;">
+            Inicia sesión aquí
+        </a>
+    </p>
+</div>
+</body>
+</html>

@@ -17,6 +17,7 @@ import java.util.Date;
 public class Schedule {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private Date start_hour;
     private Date end_hour;

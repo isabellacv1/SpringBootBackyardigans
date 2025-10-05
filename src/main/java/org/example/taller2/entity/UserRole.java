@@ -16,7 +16,7 @@ public class UserRole {
     @EmbeddedId
     private UserRoleId userRoleId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("roleId")
     @JoinColumn(name = "role_id")
     private Role role;

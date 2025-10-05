@@ -10,4 +10,6 @@ public interface RoleService {
     void deleteRole(Long roleId);
     void updateRole(Long roleId, String name, String description, String permission);
 
+    List<Role> findAll();
+
 }

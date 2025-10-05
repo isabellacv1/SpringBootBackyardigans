@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="card" style="max-width: 1024px;">
+    <div class="header-row">
+        <span class="badge badge--title">Admin</span>
+        <h1>Gestión de Usuarios y Roles</h1>
+    </div>
+    <p class="sub">Administra los usuarios y sus roles en el sistema.</p>
+
+    <!-- Tabla de Usuarios -->
+    <div class="user-table-container">
+        <h2 class="section-title">Usuarios Registrados</h2>
+
+        <table class="table table--compact">
+            <thead>
+            <tr>
+                <th class="col-id">ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Roles / Estado</th>
+                <th class="col-actions">Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}">1</td>
+                <td th:text="${user.name}">Nombre de Usuario</td>
+                <td class="td-ellipsis" th:text="${user.email}">email@ejemplo.com</td>
+                <td>
+                    <th:block th:if="${user.userRoles.isEmpty()}">
+                        <span class="tag tag--pending">Por aprobar</span>
+                    </th:block>
+                    <th:block th:unless="${user.userRoles.isEmpty()}">
+                        <span th:each="userRole : ${user.userRoles}" class="tag tag--role" th:text="${userRole.role.name}"></span>
+                    </th:block>
+                </td>
+                <td>
+                    <div class="table-actions">
+                        <th:block th:if="${user.userRoles.isEmpty()}">
+                            <a th:href="@{/admin/user/{id}/roles/associate(id=${user.id})}" class="btn btn--primary btn--sm">Aprobar</a>
+                        </th:block>
+                        <th:block th:unless="${user.userRoles.isEmpty()}">
+                            <a th:href="@{/admin/user/{id}/roles/associate(id=${user.id})}" class="btn btn--ghost btn--sm">Asociar Rol</a>
+                            <a th:href="@{/admin/user/{id}/roles/remove(id=${user.id})}" class="btn btn--ghost btn--sm">Quitar Rol</a>
+                        </th:block>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- Sección de Gestión de Roles -->
+    <div class="role-management-container" style="margin-top: 40px;">
+        <h2 class="section-title">Gestión de Roles</h2>
+        <p class="sub">Crea, edita y asigna permisos a los roles del sistema.</p>
+        <div class="actions">
+            <a th:href="@{/admin/roles/create}" class="btn btn--primary">Crear Nuevo Rol</a>
+            <a th:href="@{/admin/roles}" class="btn btn--ghost">Ver Todos los Roles</a>
+        </div>
+    </div>
+
+    <a th:href="@{/}" class="btn-back" style="margin-top: 30px;">Volver al Inicio</a>
+</div>
+</body>
+</html>

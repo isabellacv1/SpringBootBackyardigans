@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Página de Inicio</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="card" style="max-width: 640px;">
+    <div class="header-row">
+        <span class="badge badge--title">Bienvenido</span>
+        <h1 sec:authentication="name">Usuario</h1>
+    </div>
+    <p class="sub">Has iniciado sesión correctamente en la aplicación.</p>
+
+    <div sec:authorize="hasRole('ADMIN')" class="admin-content">
+        <h2 class="section-title">Panel de Administrador</h2>
+        <p class="sub">Tienes acceso a las herramientas de gestión.</p>
+        <ul class="list">
+            <li class="list-item">
+                <a th:href="@{/admin/index}">Gestionar Usuarios y Roles</a>
+            </li>
+        </ul>
+    </div>
+
+    <div sec:authorize="hasRole('USER')" class="user-content">
+        <h2 class="section-title">Tu Espacio</h2>
+        <p class="sub">Aquí encontrarás tus rutinas y progreso.</p>
+        <ul class="list">
+            <li class="list-item"><a th:href="@{/routines}">Mis Rutinas</a></li>
+            <li class="list-item"><a th:href="@{/progress}">Mi Progreso</a></li>
+        </ul>
+    </div>
+
+    <form th:action="@{/logout}" method="post" style="margin-top: 20px;">
+        <button type="submit" class="btn btn--primary">Cerrar Sesión</button>
+    </form>
+</div>
+</body>
+</html>
